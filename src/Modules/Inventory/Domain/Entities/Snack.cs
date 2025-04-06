@@ -43,7 +43,7 @@ internal class Snack : Entity<Snack>
             }
             if (snackType == SnackType.NotSet)
             {
-                throw new ArgumentException($"{snackType.ToString()} is invalid...", nameof(snackType));
+                throw new ArgumentException($"{snackType} is invalid...", nameof(snackType));
             }
             if (string.IsNullOrWhiteSpace(index))
             {
