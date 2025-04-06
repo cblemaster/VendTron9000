@@ -19,6 +19,9 @@ internal class Inventory : Entity<Inventory>
 
     internal Inventory(InventoryType inventoryType, IEnumerable<Snack> snacks) : this(inventoryType, snacks, Guid.NewGuid()) { }
 
+    
+    internal void AddSnacks(IEnumerable<Snack> snacks) => _snacks.ToList().AddRange(snacks);
+
     internal void RemoveSnack(Snack snack)
     {
         if (_snacks.Contains(snack))
