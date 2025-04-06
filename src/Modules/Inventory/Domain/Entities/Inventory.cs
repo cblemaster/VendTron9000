@@ -12,15 +12,14 @@ internal class Inventory : Entity<Inventory>
 
     internal Inventory(InventoryType inventoryType, IEnumerable<Snack> snacks, Guid id)
     {
-        _snacks = snacks;
         InventoryType = inventoryType;
+        _snacks = snacks;
         Id = new Identifier<Inventory>(id);
     }
 
     internal Inventory(InventoryType inventoryType, IEnumerable<Snack> snacks) : this(inventoryType, snacks, Guid.NewGuid()) { }
 
-
-    internal void AddSnacks(IEnumerable<Snack> snacks) => _snacks.ToList().AddRange(snacks);
+    internal void AddSnacks(IEnumerable<Snack> snacks) => _snacks.ToList().AddRange(snacks.Where(s => s.Inventory.InventoryType == InventoryType));
 
     internal void RemoveSnack(Snack snack)
     {
