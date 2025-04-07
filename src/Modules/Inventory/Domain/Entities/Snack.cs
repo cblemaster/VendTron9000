@@ -1,15 +1,17 @@
 ﻿
 using Modules.Inventory.Domain.Enumerations;
+using Modules.Inventory.Domain.ValueObjects;
+using System.Text.RegularExpressions;
 
 namespace Modules.Inventory.Domain.Entities;
 
 internal class Snack : Entity<Snack>
 {
-    internal string Label { get; init; }
-    internal decimal Price { get; init; }
-    internal decimal Cost { get; init; }
+    internal Descriptor Label { get; init; }
+    internal Currency Price { get; init; }
+    internal Currency Cost { get; init; }
     internal SnackType SnackType { get; init; }
-    internal string MachineInventoryIndex { get; init; }
+    internal Descriptor MachineInventoryIndex { get; init; }
     internal Inventory Inventory { get; init; }
     internal Identifier<Inventory> InventoryId { get; init; }
     internal DateTimeOffset DateAddedToMachineInventory { get; init; }
@@ -19,11 +21,11 @@ internal class Snack : Entity<Snack>
     {
         ValidateParams(label, price, cost, snackType, index, inventory);
 
-        Label = label;
-        Price = price;
-        Cost = cost;
+        Label = new Descriptor(label);
+        Price = new Currency(price);
+        Cost = new Currency(cost);
         SnackType = snackType;
-        MachineInventoryIndex = index;
+        MachineInventoryIndex = new Descriptor(index);
         Inventory = inventory;
         InventoryId = inventory.Id;
         DateAddedToMachineInventory = dateAdded;
@@ -47,7 +49,7 @@ internal class Snack : Entity<Snack>
             {
                 throw new ArgumentException($"{snackType} is invalid...", nameof(snackType));
             }
-            if (string.IsNullOrWhiteSpace(index))
+            if (string.IsNullOrWhiteSpace(index) || !Regex.Match(index, @"^[A-D][1-4]").Success)
             {
                 throw new ArgumentException("Index is invalid...", nameof(index));
             }
