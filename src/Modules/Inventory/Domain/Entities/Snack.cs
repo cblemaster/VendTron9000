@@ -11,6 +11,7 @@ internal class Snack : Entity<Snack>
     internal SnackType SnackType { get; init; }
     internal string MachineInventoryIndex { get; init; }
     internal Inventory Inventory { get; init; }
+    internal Identifier<Inventory> InventoryId { get; init; }
     internal DateTimeOffset DateAddedToMachineInventory { get; init; }
     internal override Identifier<Snack> Id { get; init; }
 
@@ -24,6 +25,7 @@ internal class Snack : Entity<Snack>
         SnackType = snackType;
         MachineInventoryIndex = index;
         Inventory = inventory;
+        InventoryId = inventory.Id;
         DateAddedToMachineInventory = dateAdded;
         Id = new Identifier<Snack>(id);
 

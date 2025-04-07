@@ -5,7 +5,7 @@ namespace Modules.Inventory.Domain.Entities;
 
 internal class Inventory : Entity<Inventory>
 {
-    private readonly IEnumerable<Snack> _snacks;
+    internal IEnumerable<Snack> Snacks { get; init; }
 
     internal InventoryType InventoryType { get; init; }
     internal override Identifier<Inventory> Id { get; init; }
@@ -13,21 +13,21 @@ internal class Inventory : Entity<Inventory>
     internal Inventory(InventoryType inventoryType, IEnumerable<Snack> snacks, Guid id)
     {
         InventoryType = inventoryType;
-        _snacks = snacks;
+        Snacks = snacks;
         Id = new Identifier<Inventory>(id);
     }
 
     internal Inventory(InventoryType inventoryType, IEnumerable<Snack> snacks) : this(inventoryType, snacks, Guid.NewGuid()) { }
 
-    internal void AddSnacks(IEnumerable<Snack> snacks) => _snacks.ToList().AddRange(snacks.Where(s => s.Inventory.InventoryType == InventoryType));
+    internal void AddSnacks(IEnumerable<Snack> snacks) => Snacks.ToList().AddRange(snacks.Where(s => s.Inventory.InventoryType == InventoryType));
 
     internal void RemoveSnack(Snack snack)
     {
-        if (_snacks.Contains(snack))
+        if (Snacks.Contains(snack))
         {
-            _ = _snacks.ToList().Remove(snack);
+            _ = Snacks.ToList().Remove(snack);
         }
     }
 
-    internal IReadOnlyCollection<Snack> GetSnacksAvailableForPurchase() => _snacks.Where(s => s.Inventory.InventoryType == InventoryType.SnacksAvailableForPurchase).OrderBy(s => s.Price).ThenBy(s => s.Label).ThenBy(s => s.SnackType.ToString()).ThenBy(s => s.MachineInventoryIndex).ToList().AsReadOnly();
+    internal IReadOnlyCollection<Snack> GetSnacksAvailableForPurchase() => Snacks.Where(s => s.Inventory.InventoryType == InventoryType.SnacksAvailableForPurchase).OrderBy(s => s.Price).ThenBy(s => s.Label).ThenBy(s => s.SnackType.ToString()).ThenBy(s => s.MachineInventoryIndex).ToList().AsReadOnly();
 }
