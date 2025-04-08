@@ -3,13 +3,14 @@ using Modules.Inventory.Domain.Enumerations;
 
 namespace Modules.Inventory.Domain.Entities;
 
-internal class Inventory : Entity<Inventory>
+public class Inventory : Entity<Inventory>
 {
-    internal IEnumerable<Snack> Snacks { get; init; }
+    public IEnumerable<Snack> Snacks { get; init; }
 
-    internal InventoryType InventoryType { get; init; }
-    internal override Identifier<Inventory> Id { get; init; }
+    public InventoryType InventoryType { get; init; }
+    public override Identifier<Inventory> Id { get; init; }
 
+    private Inventory() { }
     internal Inventory(InventoryType inventoryType, IEnumerable<Snack> snacks, Guid id)
     {
         InventoryType = inventoryType;

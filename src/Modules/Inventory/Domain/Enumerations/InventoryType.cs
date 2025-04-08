@@ -1,7 +1,7 @@
 ﻿
 namespace Modules.Inventory.Domain.Enumerations;
 
-internal enum InventoryType
+public enum InventoryType
 {
     NotSet = 0,
     SnacksAvailableForPurchase = 1,

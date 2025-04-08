@@ -5,17 +5,17 @@ using System.Text.RegularExpressions;
 
 namespace Modules.Inventory.Domain.Entities;
 
-internal class Snack : Entity<Snack>
+public class Snack : Entity<Snack>
 {
-    internal Descriptor Label { get; init; }
-    internal Currency Price { get; init; }
-    internal Currency Cost { get; init; }
-    internal SnackType SnackType { get; init; }
-    internal Descriptor MachineInventoryIndex { get; init; }
-    internal Inventory Inventory { get; init; }
-    internal Identifier<Inventory> InventoryId { get; init; }
-    internal DateTimeOffset DateAddedToMachineInventory { get; init; }
-    internal override Identifier<Snack> Id { get; init; }
+    public Descriptor Label { get; init; }
+    public Currency Price { get; init; }
+    public Currency Cost { get; init; }
+    public SnackType SnackType { get; init; }
+    public Descriptor MachineInventoryIndex { get; init; }
+    public Inventory Inventory { get; init; }
+    public Identifier<Inventory> InventoryId { get; init; }
+    public DateTimeOffset DateAddedToMachineInventory { get; init; }
+    public override Identifier<Snack> Id { get; init; }
 
     internal Snack(string label, decimal price, decimal cost, SnackType snackType, string index, Inventory inventory, DateTimeOffset dateAdded, Guid id)
     {

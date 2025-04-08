@@ -1,10 +1,10 @@
 ﻿
 namespace Modules.Inventory.Domain.Entities;
 
-internal sealed class Identifier<T>
+public sealed class Identifier<T>
 {
-    internal Guid Value { get; init; }
+    public Guid Value { get; init; }
 
-    internal Identifier(Guid value) => Value = value;
+    public Identifier(Guid value) => Value = value;
     internal Identifier() : this(Guid.NewGuid()) { }
 }

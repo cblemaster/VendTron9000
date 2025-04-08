@@ -1,7 +1,7 @@
 ﻿
 namespace Modules.Inventory.Domain.Enumerations;
 
-internal enum SnackType
+public enum SnackType
 {
     NotSet = 0,
     Chips = 1,
