@@ -1,7 +1,7 @@
 ﻿
 namespace Modules.Inventory.Domain.Entities;
 
-public abstract class Entity<T>
+internal abstract class Entity<T>
 {
-    public abstract Identifier<T> Id { get; init; }
+    internal abstract Identifier<T> Id { get; init; }
 }
