@@ -8,6 +8,7 @@ internal sealed class SnackType : Entity<SnackType>
     internal IEnumerable<Snack> Snacks { get; init; } = [];
 
     private SnackType() { }
+
     internal SnackType(string name, Guid id)
     {
         Name = name;

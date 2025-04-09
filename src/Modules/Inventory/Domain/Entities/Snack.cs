@@ -1,7 +1,5 @@
 ﻿
-using Modules.Inventory.Domain.Enumerations;
 using Modules.Inventory.Domain.ValueObjects;
-using System.Text.RegularExpressions;
 
 namespace Modules.Inventory.Domain.Entities;
 
@@ -17,6 +15,7 @@ internal class Snack : Entity<Snack>
     internal override Identifier<Snack> Id { get; init; }
 
     private Snack() { }
+
     internal Snack(string label, decimal price, decimal cost, string snackType, Guid inventoryId, DateTimeOffset dateAdded, Guid id)
     {
         ValidateParams(label, price, cost, snackType);
