@@ -11,8 +11,8 @@ internal class Snack : Entity<Snack>
     internal Currency Price { get; init; }
     internal Currency Cost { get; init; }
     internal SnackType SnackType { get; init; }
-    internal Inventory Inventory { get; init; }
-    internal Identifier<Inventory> InventoryId { get; init; }
+    internal SnacksForSale Inventory { get; init; }
+    internal Identifier<SnacksForSale> InventoryId { get; init; }
     internal DateTimeOffset DateAddedToInventory { get; init; }
     internal override Identifier<Snack> Id { get; init; }
 
@@ -25,7 +25,7 @@ internal class Snack : Entity<Snack>
         Price = new Currency(price);
         Cost = new Currency(cost);
         SnackType = new(snackType);
-        InventoryId = new Identifier<Inventory>(inventoryId);
+        InventoryId = new Identifier<SnacksForSale>(inventoryId);
         DateAddedToInventory = dateAdded;
         Id = new Identifier<Snack>(id);
 
