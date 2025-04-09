@@ -5,33 +5,31 @@ using System.Text.RegularExpressions;
 
 namespace Modules.Inventory.Domain.Entities;
 
-public class Snack : Entity<Snack>
+internal class Snack : Entity<Snack>
 {
-    public Descriptor Label { get; init; }
-    public Currency Price { get; init; }
-    public Currency Cost { get; init; }
-    public SnackType SnackType { get; init; }
-    public Descriptor MachineInventoryIndex { get; init; }
-    public Inventory Inventory { get; init; }
-    public Identifier<Inventory> InventoryId { get; init; }
-    public DateTimeOffset DateAddedToMachineInventory { get; init; }
-    public override Identifier<Snack> Id { get; init; }
+    internal Descriptor Label { get; init; }
+    internal Currency Price { get; init; }
+    internal Currency Cost { get; init; }
+    internal SnackType SnackType { get; init; }
+    internal Inventory Inventory { get; init; }
+    internal Identifier<Inventory> InventoryId { get; init; }
+    internal DateTimeOffset DateAddedToInventory { get; init; }
+    internal override Identifier<Snack> Id { get; init; }
 
-    internal Snack(string label, decimal price, decimal cost, SnackType snackType, string index, Inventory inventory, DateTimeOffset dateAdded, Guid id)
+    private Snack() { }
+    internal Snack(string label, decimal price, decimal cost, string snackType, Guid inventoryId, DateTimeOffset dateAdded, Guid id)
     {
-        ValidateParams(label, price, cost, snackType, index, inventory);
+        ValidateParams(label, price, cost, snackType);
 
         Label = new Descriptor(label);
         Price = new Currency(price);
         Cost = new Currency(cost);
-        SnackType = snackType;
-        MachineInventoryIndex = new Descriptor(index);
-        Inventory = inventory;
-        InventoryId = inventory.Id;
-        DateAddedToMachineInventory = dateAdded;
+        SnackType = new(snackType);
+        InventoryId = new Identifier<Inventory>(inventoryId);
+        DateAddedToInventory = dateAdded;
         Id = new Identifier<Snack>(id);
 
-        static void ValidateParams(string label, decimal price, decimal cost, SnackType snackType, string index, Inventory inventory)
+        static void ValidateParams(string label, decimal price, decimal cost, string snackType)
         {
             if (string.IsNullOrWhiteSpace(label) || label.Length > 12)
             {
@@ -45,20 +43,12 @@ public class Snack : Entity<Snack>
             {
                 throw new ArgumentOutOfRangeException(nameof(cost), "Cost must be greater than zero...");
             }
-            if (snackType == SnackType.NotSet)
+            if (string.IsNullOrWhiteSpace(snackType))
             {
-                throw new ArgumentException($"{snackType} is invalid...", nameof(snackType));
-            }
-            if (string.IsNullOrWhiteSpace(index) || !Regex.Match(index, @"^[A-D][1-4]").Success)
-            {
-                throw new ArgumentException("Index is invalid...", nameof(index));
-            }
-            if (inventory is null)
-            {
-                throw new ArgumentNullException(nameof(inventory), "Inventory is required...");
+                throw new ArgumentException($"Snack type {snackType} is invalid...", nameof(snackType));
             }
         }
     }
 
-    internal Snack(string label, decimal price, decimal cost, SnackType snackType, string index, Inventory inventory) : this(label, price, cost, snackType, index, inventory, DateTimeOffset.UtcNow, Guid.NewGuid()) { }
+    internal Snack(string label, decimal price, decimal cost, string snackType, Guid inventoryId) : this(label, price, cost, snackType, inventoryId, DateTimeOffset.UtcNow, Guid.NewGuid()) { }
 }
