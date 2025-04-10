@@ -70,7 +70,7 @@ internal sealed class InventoryDbContext : DbContext
 #pragma warning restore IDE0058
         });
 
-    override protected void OnModelCreating(ModelBuilder modelBuilder)
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
 #pragma warning disable IDE0058
         modelBuilder.HasDefaultSchema("Inventory");
