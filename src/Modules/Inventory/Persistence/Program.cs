@@ -12,10 +12,10 @@ Console.WriteLine("Welcome to VendTron-9000!!!...");
 IHostBuilder builder = Host
     .CreateDefaultBuilder(args)
     .ConfigureServices((hostContext, services) =>
-    {
         services.AddDbContext<InventoryDbContext>(options =>
             options
             .UseSqlServer(CONNSTRING)
+#pragma warning disable IDE0058
             .UseSeeding((context, b) =>
             {
                 if (!context.Set<SnackType>().Any())
@@ -25,48 +25,28 @@ IHostBuilder builder = Host
                     context.Set<SnackType>().Add(new SnackType("Drink", Guid.Parse("3858958D-A929-497D-A178-6DB5FD14437A")));
                     context.Set<SnackType>().Add(new SnackType("Pastry", Guid.Parse("FAB70135-3BC3-4B50-8E91-E639532F4624")));
                 }
-                if (!context.Set<SnackLocation>().Any())
-                {
-                    context.Set<SnackLocation>().Add(new SnackLocation("A1", Guid.Parse("2F897722-5120-442E-96CA-4FE95ECC86D0")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("A2", Guid.Parse("2F109C80-878B-494E-8EC0-1E705F3BD84A")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("A3", Guid.Parse("1E734EB2-9F04-44E2-A8D0-17CDD1E792B2")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("A4", Guid.Parse("AE1F0E4F-38F5-4755-B65D-FEB86693C5C0")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("B1", Guid.Parse("F830D720-7893-4BB4-AB65-B8296A892641")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("B2", Guid.Parse("37061288-0D3E-44A6-936D-EC4D1BE97F3F")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("B3", Guid.Parse("D58180C5-00B0-41AD-AC87-CCB8F8CD7593")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("B4", Guid.Parse("C7BED310-6300-44BD-8E61-18B429A87ECA")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("C1", Guid.Parse("9A8AB531-198A-48F6-8B0D-AB002504D33B")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("C2", Guid.Parse("D81D3EFD-66E9-4818-9E3A-D51CFFAFEA4F")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("C3", Guid.Parse("09C87E20-CB01-469B-9E13-900B3089F54C")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("C4", Guid.Parse("3D75F890-6650-4987-B24F-E89CDDA0C1B8")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("D1", Guid.Parse("511C0E4F-35CE-44A9-B51D-C662A425DC75")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("D2", Guid.Parse("F8C94E17-52C0-4A52-A13F-E7E9D73BEE31")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("D3", Guid.Parse("189CA5F7-B3F5-4FC3-9205-C2AEB800E2C3")));
-                    context.Set<SnackLocation>().Add(new SnackLocation("D4", Guid.Parse("33E48D66-CE46-4E89-A4EB-2698676F8587")));
-                }
                 if (!context.Set<Snack>().Any())
                 {
-                    context.Set<Snack>().Add(new Snack("Potato Crisps", 3.05m, 2.70m, Guid.Parse("48119E16-AE82-4B3F-8C91-0B6DA67DF505"), Guid.Parse("2F897722-5120-442E-96CA-4FE95ECC86D0"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Prongles", 1.45m, 1.25m, Guid.Parse("48119E16-AE82-4B3F-8C91-0B6DA67DF505"), Guid.Parse("2F109C80-878B-494E-8EC0-1E705F3BD84A"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Boogles", 2.75m, 2.40m, Guid.Parse("48119E16-AE82-4B3F-8C91-0B6DA67DF505"), Guid.Parse("1E734EB2-9F04-44E2-A8D0-17CDD1E792B2"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Veggie Crisps", 3.65m, 2.95m, Guid.Parse("48119E16-AE82-4B3F-8C91-0B6DA67DF505"), Guid.Parse("AE1F0E4F-38F5-4755-B65D-FEB86693C5C0"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
+                    context.Set<Snack>().Add(new Snack("Potato Crisps", 3.05m, 2.70m, Guid.Parse("48119E16-AE82-4B3F-8C91-0B6DA67DF505"), "A1", Guid.Parse("09C5917C-03F5-4F59-95DC-19856D12756F")));
+                    context.Set<Snack>().Add(new Snack("Prongles", 1.45m, 1.25m, Guid.Parse("48119E16-AE82-4B3F-8C91-0B6DA67DF505"), "A2", Guid.Parse("46AC5B5F-700A-4AEE-8106-D4B745DCC93B")));
+                    context.Set<Snack>().Add(new Snack("Boogles", 2.75m, 2.40m, Guid.Parse("48119E16-AE82-4B3F-8C91-0B6DA67DF505"), "A3", Guid.Parse("720F4919-6BBC-4090-A6C9-00C31798F29D")));
+                    context.Set<Snack>().Add(new Snack("Veggie Crisps", 3.65m, 2.95m, Guid.Parse("48119E16-AE82-4B3F-8C91-0B6DA67DF505"), "A4", Guid.Parse("ADAF1AFB-20DF-4EC3-BEFB-A4B3CAFFA159")));
 
-                    context.Set<Snack>().Add(new Snack("Lieutenants Wafers", 1.80m, 1.50m, Guid.Parse("DBD74CA6-C24A-4C65-8521-32E083C40A8E"), Guid.Parse("F830D720-7893-4BB4-AB65-B8296A892641"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Chweesits", 1.50m, 1.05m, Guid.Parse("DBD74CA6-C24A-4C65-8521-32E083C40A8E"), Guid.Parse("37061288-0D3E-44A6-936D-EC4D1BE97F3F"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Pita Squares", 1.50m, 1.25m, Guid.Parse("DBD74CA6-C24A-4C65-8521-32E083C40A8E"), Guid.Parse("D58180C5-00B0-41AD-AC87-CCB8F8CD7593"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Nyblets", 1.75m, 1.35m, Guid.Parse("DBD74CA6-C24A-4C65-8521-32E083C40A8E"), Guid.Parse("C7BED310-6300-44BD-8E61-18B429A87ECA"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
+                    context.Set<Snack>().Add(new Snack("Lieutenants Wafers", 1.80m, 1.50m, Guid.Parse("DBD74CA6-C24A-4C65-8521-32E083C40A8E"), "B1", Guid.Parse("269CF2B1-88D0-4809-9154-FCCF0F3D5D20")));
+                    context.Set<Snack>().Add(new Snack("Chweesits", 1.50m, 1.05m, Guid.Parse("DBD74CA6-C24A-4C65-8521-32E083C40A8E"), "B2", Guid.Parse("50C557B2-9AAA-4DFD-901F-89E9D3B250DB")));
+                    context.Set<Snack>().Add(new Snack("Pita Squares", 1.50m, 1.25m, Guid.Parse("DBD74CA6-C24A-4C65-8521-32E083C40A8E"), "B3", Guid.Parse("5B1910CA-1F60-4A41-BECE-2D19C8F6567C")));
+                    context.Set<Snack>().Add(new Snack("Nyblets", 1.75m, 1.35m, Guid.Parse("DBD74CA6-C24A-4C65-8521-32E083C40A8E"), "B4", Guid.Parse("7921B98C-FAF1-4365-96CC-1F46D6FE9197")));
 
-                    context.Set<Snack>().Add(new Snack("Cola", 1.25m, 1.00m, Guid.Parse("3858958D-A929-497D-A178-6DB5FD14437A"), Guid.Parse("9A8AB531-198A-48F6-8B0D-AB002504D33B"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Dr. Rumble", 1.50m, 1.25m, Guid.Parse("3858958D-A929-497D-A178-6DB5FD14437A"), Guid.Parse("D81D3EFD-66E9-4818-9E3A-D51CFFAFEA4F"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Mountain Condensate", 1.50m, 1.15m, Guid.Parse("3858958D-A929-497D-A178-6DB5FD14437A"), Guid.Parse("09C87E20-CB01-469B-9E13-900B3089F54C"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("EnergyStroke", 1.50m, 1.00m, Guid.Parse("3858958D-A929-497D-A178-6DB5FD14437A"), Guid.Parse("3D75F890-6650-4987-B24F-E89CDDA0C1B8"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
+                    context.Set<Snack>().Add(new Snack("Cola", 1.25m, 1.00m, Guid.Parse("3858958D-A929-497D-A178-6DB5FD14437A"), "C1", Guid.Parse("94A52D08-C2FE-43B1-A983-6FEA3ADEC482")));
+                    context.Set<Snack>().Add(new Snack("Dr. Rumble", 1.50m, 1.25m, Guid.Parse("3858958D-A929-497D-A178-6DB5FD14437A"), "C2", Guid.Parse("E52EF7D1-1C6E-4E38-85A4-896841B1E448")));
+                    context.Set<Snack>().Add(new Snack("Mountain Condensate", 1.50m, 1.15m, Guid.Parse("3858958D-A929-497D-A178-6DB5FD14437A"), "C3", Guid.Parse("E7FA32E5-12B1-4CBE-BBD7-8F87B58CA4E8")));
+                    context.Set<Snack>().Add(new Snack("EnergyStroke", 1.50m, 1.00m, Guid.Parse("3858958D-A929-497D-A178-6DB5FD14437A"), "C4", Guid.Parse("07F3FC1D-A5C9-4960-82F0-AE570AE88FB8")));
 
-                    context.Set<Snack>().Add(new Snack("Cinnamon Pastry", 0.85m, 0.70m, Guid.Parse("FAB70135-3BC3-4B50-8E91-E639532F4624"), Guid.Parse("511C0E4F-35CE-44A9-B51D-C662A425DC75"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Strawberry Pastry", 0.95m, 0.80m, Guid.Parse("FAB70135-3BC3-4B50-8E91-E639532F4624"), Guid.Parse("F8C94E17-52C0-4A52-A13F-E7E9D73BEE31"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Blueberry Pastry", 0.75m, 0.65m, Guid.Parse("FAB70135-3BC3-4B50-8E91-E639532F4624"), Guid.Parse("189CA5F7-B3F5-4FC3-9205-C2AEB800E2C3"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
-                    context.Set<Snack>().Add(new Snack("Apple Pastry", 0.75m, 0.60m, Guid.Parse("FAB70135-3BC3-4B50-8E91-E639532F4624"), Guid.Parse("33E48D66-CE46-4E89-A4EB-2698676F8587"), Guid.Parse("C9BFE8BA-7E41-48EE-BB56-DE9CCD29F0C1")));
+                    context.Set<Snack>().Add(new Snack("Cinnamon Pastry", 0.85m, 0.70m, Guid.Parse("FAB70135-3BC3-4B50-8E91-E639532F4624"), "D1", Guid.Parse("89CB3F5D-7BF0-4461-B103-F3554397B31C")));
+                    context.Set<Snack>().Add(new Snack("Strawberry Pastry", 0.95m, 0.80m, Guid.Parse("FAB70135-3BC3-4B50-8E91-E639532F4624"), "D2", Guid.Parse("65A508C4-C9C4-4422-9301-2205CAE811B3")));
+                    context.Set<Snack>().Add(new Snack("Blueberry Pastry", 0.75m, 0.65m, Guid.Parse("FAB70135-3BC3-4B50-8E91-E639532F4624"), "D3", Guid.Parse("1AA5C1E1-C861-4409-8685-A0BAD52C2F40")));
+                    context.Set<Snack>().Add(new Snack("Apple Pastry", 0.75m, 0.60m, Guid.Parse("FAB70135-3BC3-4B50-8E91-E639532F4624"), "D4", Guid.Parse("FC8B9ACB-B194-4F82-B55D-583367B7A467")));
                 }
-            }));
-        
-    });
+            })));
+#pragma warning restore IDE0058
 IHost host = builder.Build();
