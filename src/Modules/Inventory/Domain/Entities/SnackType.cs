@@ -14,10 +14,4 @@ public sealed class SnackType : Entity<SnackType>
         Name = name;
         Id = new Identifier<SnackType>(id);
     }
-
-    internal SnackType(string name)
-    {
-        Name = name;
-        Id = new Identifier<SnackType>();
-    }
 }
