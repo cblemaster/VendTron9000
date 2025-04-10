@@ -16,7 +16,7 @@ public class Snack : Entity<Snack>
 
     private Snack() { }
 
-    internal Snack(string label, decimal price, decimal cost, Guid snackTypeId, Guid snackLocationId, Guid snackId)
+    public Snack(string label, decimal price, decimal cost, Guid snackTypeId, Guid snackLocationId, Guid snackId)
     {
         ValidateParams(label, price, cost);
 

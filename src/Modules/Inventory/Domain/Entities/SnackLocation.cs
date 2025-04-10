@@ -17,7 +17,7 @@ public sealed class SnackLocation : Entity<SnackLocation>
         Id = new Identifier<SnackLocation>(id);
     }
 
-    public SnackLocation(string code)
+    internal SnackLocation(string code)
     {
         Code = new Descriptor(code);
         Id = new Identifier<SnackLocation>();

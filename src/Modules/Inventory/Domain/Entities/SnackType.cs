@@ -9,7 +9,7 @@ public sealed class SnackType : Entity<SnackType>
 
     private SnackType() { }
 
-    internal SnackType(string name, Guid id)
+    public SnackType(string name, Guid id)
     {
         Name = name;
         Id = new Identifier<SnackType>(id);
