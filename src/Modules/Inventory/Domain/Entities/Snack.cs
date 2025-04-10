@@ -8,27 +8,26 @@ internal class Snack : Entity<Snack>
     internal Descriptor Label { get; init; }
     internal Currency Price { get; init; }
     internal Currency Cost { get; init; }
-    internal SnackType SnackType { get; init; }
-    internal SnacksForSale Inventory { get; init; }
-    internal Identifier<SnacksForSale> InventoryId { get; init; }
-    internal DateTimeOffset DateAddedToInventory { get; init; }
+    internal SnackType SnackType { get; init; } = default!;
+    internal Identifier<SnackType> SnackTypeId { get; init; }
+    internal SnackLocation SnackLocation { get; init; } = default!;
+    internal Identifier<SnackLocation> SnackLocationId { get; init; }
     internal override Identifier<Snack> Id { get; init; }
 
     private Snack() { }
 
-    internal Snack(string label, decimal price, decimal cost, string snackType, Guid inventoryId, DateTimeOffset dateAdded, Guid id)
+    internal Snack(string label, decimal price, decimal cost, Guid snackTypeId, Guid snackLocationId, Guid snackId)
     {
-        ValidateParams(label, price, cost, snackType);
+        ValidateParams(label, price, cost);
 
         Label = new Descriptor(label);
         Price = new Currency(price);
         Cost = new Currency(cost);
-        SnackType = new(snackType);
-        InventoryId = new Identifier<SnacksForSale>(inventoryId);
-        DateAddedToInventory = dateAdded;
-        Id = new Identifier<Snack>(id);
+        SnackTypeId = new Identifier<SnackType>(snackTypeId);
+        SnackLocationId = new Identifier<SnackLocation>(snackLocationId);
+        Id = new Identifier<Snack>(snackId);
 
-        static void ValidateParams(string label, decimal price, decimal cost, string snackType)
+        static void ValidateParams(string label, decimal price, decimal cost)
         {
             if (string.IsNullOrWhiteSpace(label) || label.Length > 12)
             {
@@ -42,12 +41,6 @@ internal class Snack : Entity<Snack>
             {
                 throw new ArgumentOutOfRangeException(nameof(cost), "Cost must be greater than zero...");
             }
-            if (string.IsNullOrWhiteSpace(snackType))
-            {
-                throw new ArgumentException($"Snack type {snackType} is invalid...", nameof(snackType));
-            }
         }
     }
-
-    internal Snack(string label, decimal price, decimal cost, string snackType, Guid inventoryId) : this(label, price, cost, snackType, inventoryId, DateTimeOffset.UtcNow, Guid.NewGuid()) { }
 }
