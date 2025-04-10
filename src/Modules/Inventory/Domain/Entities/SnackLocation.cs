@@ -3,11 +3,11 @@ using Modules.Inventory.Domain.ValueObjects;
 
 namespace Modules.Inventory.Domain.Entities;
 
-internal sealed class SnackLocation : Entity<SnackLocation>
+public sealed class SnackLocation : Entity<SnackLocation>
 {
-    internal Descriptor Code { get; init; }
-    internal IEnumerable<Snack> Snacks { get; init; } = [];
-    internal override Identifier<SnackLocation> Id { get; init; }
+    public Descriptor Code { get; init; }
+    public IEnumerable<Snack> Snacks { get; init; } = [];
+    public override Identifier<SnackLocation> Id { get; init; }
 
     private SnackLocation() { }
     

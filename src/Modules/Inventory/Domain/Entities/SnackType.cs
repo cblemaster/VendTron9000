@@ -1,11 +1,11 @@
 ﻿
 namespace Modules.Inventory.Domain.Entities;
 
-internal sealed class SnackType : Entity<SnackType>
+public sealed class SnackType : Entity<SnackType>
 {
-    internal string Name { get; init; }
-    internal IEnumerable<Snack> Snacks { get; init; } = [];
-    internal override Identifier<SnackType> Id { get; init; }
+    public string Name { get; init; }
+    public IEnumerable<Snack> Snacks { get; init; } = [];
+    public override Identifier<SnackType> Id { get; init; }
 
     private SnackType() { }
 

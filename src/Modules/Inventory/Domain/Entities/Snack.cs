@@ -3,16 +3,16 @@ using Modules.Inventory.Domain.ValueObjects;
 
 namespace Modules.Inventory.Domain.Entities;
 
-internal class Snack : Entity<Snack>
+public class Snack : Entity<Snack>
 {
-    internal Descriptor Label { get; init; }
-    internal Currency Price { get; init; }
-    internal Currency Cost { get; init; }
-    internal SnackType SnackType { get; init; } = default!;
-    internal Identifier<SnackType> SnackTypeId { get; init; }
-    internal SnackLocation SnackLocation { get; init; } = default!;
-    internal Identifier<SnackLocation> SnackLocationId { get; init; }
-    internal override Identifier<Snack> Id { get; init; }
+    public Descriptor Label { get; init; }
+    public Currency Price { get; init; }
+    public Currency Cost { get; init; }
+    public SnackType SnackType { get; init; } = default!;
+    public Identifier<SnackType> SnackTypeId { get; init; }
+    public SnackLocation SnackLocation { get; init; } = default!;
+    public Identifier<SnackLocation> SnackLocationId { get; init; }
+    public override Identifier<Snack> Id { get; init; }
 
     private Snack() { }
 
