@@ -7,14 +7,15 @@ public sealed class SnackLocation : Entity<SnackLocation>
 {
     public Descriptor Code { get; init; }
     public Snack Snack { get; init; } = default!;
-    public Identifier<Snack> SnackId { get; init; } = default!
+    public Identifier<Snack> SnackId { get; init; }
     public override Identifier<SnackLocation> Id { get; init; }
 
     private SnackLocation() { }
 
-    public SnackLocation(string code, Guid id)
+    internal SnackLocation(string code, Guid snackId)
     {
         Code = new Descriptor(code);
-        Id = new Identifier<SnackLocation>(id);
+        SnackId = new Identifier<Snack>(snackId);
+        Id = new Identifier<SnackLocation>();
     }
 }

@@ -16,7 +16,7 @@ public class Snack : Entity<Snack>
 
     private Snack() { }
 
-    public Snack(string label, decimal price, decimal cost, Guid snackTypeId, Guid snackLocationId, Guid snackId)
+    public Snack(string label, decimal price, decimal cost, Guid snackTypeId, string snackLocationCode, Guid snackId)
     {
         ValidateParams(label, price, cost);
 
@@ -24,7 +24,8 @@ public class Snack : Entity<Snack>
         Price = new Currency(price);
         Cost = new Currency(cost);
         SnackTypeId = new Identifier<SnackType>(snackTypeId);
-        SnackLocationId = new Identifier<SnackLocation>(snackLocationId);
+        SnackLocation = new SnackLocation(snackLocationCode, snackId);
+        SnackLocationId = SnackLocation.Id;
         Id = new Identifier<Snack>(snackId);
 
         static void ValidateParams(string label, decimal price, decimal cost)
