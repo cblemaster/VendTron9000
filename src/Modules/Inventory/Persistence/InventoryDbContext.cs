@@ -33,6 +33,7 @@ internal sealed class InventoryDbContext : DbContext
             entity.Property(e => e.Code).HasConversion(c => c.Value, c => new Descriptor(c));
             entity.Property(e => e.Code).HasMaxLength(2).IsUnicode(false);
             entity.HasIndex(e => e.Code).IsUnique();
+            entity.Property(e => e.SnackId).HasConversion(i => i.Value, i => new Identifier<Snack>(i));
         });
 
         modelBuilder.Entity<Snack>(entity =>
@@ -54,8 +55,8 @@ internal sealed class InventoryDbContext : DbContext
                 .HasForeignKey(e => e.SnackTypeId)
                 .OnDelete(DeleteBehavior.Cascade);
             entity.HasOne(e => e.SnackLocation)
-                .WithMany(e => e.Snacks)
-                .HasForeignKey(e => e.SnackLocationId)
+                .WithOne(e => e.Snack)
+                .HasForeignKey<Snack>(e => e.SnackLocationId)
                 .OnDelete(DeleteBehavior.Cascade);
         });
 #pragma warning restore IDE0058
