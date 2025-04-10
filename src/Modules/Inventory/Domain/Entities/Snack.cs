@@ -29,9 +29,9 @@ public class Snack : Entity<Snack>
 
         static void ValidateParams(string label, decimal price, decimal cost)
         {
-            if (string.IsNullOrWhiteSpace(label) || label.Length > 12)
+            if (string.IsNullOrWhiteSpace(label) || label.Length > 30)
             {
-                throw new ArgumentException("Label is required and must be fewer than 12 characters in length...", nameof(label));
+                throw new ArgumentException("Label is required and must be fewer than 30 characters in length...", nameof(label));
             }
             if (price <= 0)
             {

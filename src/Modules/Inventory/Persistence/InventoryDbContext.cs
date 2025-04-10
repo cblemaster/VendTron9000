@@ -44,7 +44,7 @@ internal sealed class InventoryDbContext : DbContext
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Id).HasConversion(i => i.Value, i => new Identifier<Snack>(i));
             entity.Property(e => e.Label).HasConversion(l => l.Value, l => new Descriptor(l));
-            entity.Property(e => e.Label).HasMaxLength(12).IsUnicode(false);
+            entity.Property(e => e.Label).HasMaxLength(30).IsUnicode(false);
             entity.HasIndex(e => e.Label).IsUnique();
             entity.Property(e => e.Price).HasConversion(p => p.Amount, p => new Currency(p, "USD"));
             entity.Property(e => e.Cost).HasConversion(c => c.Amount, c => new Currency(c, "USD"));
